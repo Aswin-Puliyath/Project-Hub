@@ -1,0 +1,41 @@
+{% extends 'tm/index.html' %}
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    <div class="section-title">
+        <span>Assigned Tasks</span>
+        <h2>Assigned Tasks</h2>
+
+
+    </div>
+    {#    <center><h2><b>PROJECTS</b></h2></center>#}
+    <form id="form1" name="form1" method="post" action="/searap#about">
+        <table class="table table-hover">
+
+            <tr>
+                <td align="center"><strong>ID</strong></td>
+                <td align="center"><strong>Lead</strong></td>
+                <td align="center"><strong>Project</strong></td>
+                <td align="center"><strong>Task</strong></td>
+                <td align="center"><strong>Description</strong></td>
+                <td align="center"><strong>Deadline</strong></td>
+                <td align="center"><strong>Status</strong></td>
+
+            </tr>
+            {% for i in ob %}
+                <tr>
+                    <td align="center">{{ i.ASSIGN.PROJECT.proid }}</td>
+                    <td align="center">{{ i.ASSIGN.LOGIN.username }}</td>
+                    <td align="center">{{ i.ASSIGN.PROJECT.ptitle }}</td>
+                    <td align="center">{{ i.ttitle }}</td>
+                    <td align="center">{{ i.tdesc }}</td>
+                    <td align="center">{{ i.deadline }}</td>
+                    <td align="center">{{ i.status }}<br>{% if i.status != "Completed" %}
+                        <a href="/uptask/{{ i.id }}#about">Update</a>{% endif %}</td>
+
+                </tr>{% endfor %}
+        </table>
+    </form>
+    </body>
+{% endblock %}

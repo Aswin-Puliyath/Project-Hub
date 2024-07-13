@@ -1,0 +1,39 @@
+{% extends 'tl/index.html' %}
+{% block body %}
+    <body>
+    <form action="/tskdt#about" method="post">
+        <div class="section-title">
+            <span>Reports</span>
+            <h2>Reports</h2>
+        </div>
+        <div class="d-flex justify-content-center mb-4">
+            <div class="d-flex">
+                <input name="dt" type="date" value="{{ dt }}" class="form-control mr-2" placeholder="Date" required/>&nbsp;&nbsp;&nbsp;
+                <input type="submit" class="btn btn-primary" name="Submit" value="SEARCH"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+            </div>
+        </div>
+
+        <div class="row">
+            {% for report in ob %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><b>{{ report.TASK.ttitle }}</b></h5>
+                            <h6 class="card-title text-center"><b>{{ report.TASK.LOGIN.username }}</b></h6>
+                            <p>{{ report.date }}</p><a href="/dlttsk/{{ i.id }}"><i class="fas fa-trash-alt"></i></a>
+                            <p class="card-text">{{ report.report }}</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% if forloop.counter == 3 %}
+                    <div class="w-100"></div> <!-- This adds a space after the first row -->
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </form>
+    </body>
+{% endblock %}

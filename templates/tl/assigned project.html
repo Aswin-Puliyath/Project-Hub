@@ -1,0 +1,50 @@
+{% extends 'tl/index.html' %}
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    <div class="section-title">
+        <span>Assigned Projects</span>
+        <h2>Assigned Projects</h2>
+
+    </div>
+    {#    <center><h2><b>PROJECTS</b></h2></center>#}
+    <form id="form1" name="form1" method="post" action="/searap#about">
+        <table class="table table-hover">
+            <tr>
+                <td align="right" colspan="2">
+                    <b>Date</b></td>
+                <td colspan="2">
+                    <input name="dt" type="date" value="{{ dt }}" class="form-control" placeholder="Date" required/>
+                </td>
+                <td>
+                    <input type="submit" name="Submit" value="SEARCH" class="btn btn-primary"/></td>
+                <td colspan="2" align="center">
+                </td>
+            </tr>
+            <tr>
+                <td align="center"><strong>ID</strong></td>
+                <td align="center"><strong>Title</strong></td>
+                <td align="center"><strong>Description</strong></td>
+                <td align="center"><strong>Assigned</strong></td>
+                <td align="center"><strong>Deadline</strong></td>
+                <td align="center"><strong>Tasks</strong></td>
+                <td align="center"><strong>Status</strong></td>
+
+            </tr>
+            {% for i in obj %}
+                <tr>
+                    <td align="center">{{ i.PROJECT.proid }}</td>
+                    <td align="center">{{ i.PROJECT.ptitle }}</td>
+                    <td align="center">{{ i.PROJECT.pdesc }}</td>
+                    <td align="center">{{ i.PROJECT.date }}</td>
+                    <td align="center">{{ i.PROJECT.deadline }}</td>
+                    <td align="center"><a href="/vt/{{ i.id }}#about">View</a></td>
+                    <td align="center">{{ i.status }}<br>{% if i.status != "Completed" %}
+                        <a href="/uppro/{{ i.id }}#about">Update</a>{% endif %}</td>
+
+                </tr>{% endfor %}
+        </table>
+    </form>
+    </body>
+{% endblock %}

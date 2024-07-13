@@ -1,0 +1,54 @@
+{% extends 'tl/index.html' %}
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    <div class="section-title">
+        <span>Tasks</span>
+        <h2>Tasks</h2>
+
+    </div>
+    {#    <center><h2><b>PROJECTS</b></h2></center>#}
+    <form id="form1" name="form1" method="post" action="/tsksea#about">
+        <table class="table table-hover">
+            <tr>
+                <td align="right">
+                    <b></b></td>
+                <td colspan="2" align="center">
+                    <input name="task" type="text" value="{{ tt }}" class="form-control" placeholder="Task" required/>
+                </td>
+                <td align="center">
+                    <input type="submit" name="Submit" value="SEARCH" class="btn btn-primary"/></td>
+                <td colspan="2" align="center"><a href="/chtl#about"><b><h2>New</h2></b></a></td>
+                <td colspan="2" align="center"><a href="/tr#about"><b><h3>Task Reports</h3></b></a>
+
+                </td>
+            </tr>
+            <tr>
+
+                <td align="center"><strong>Task</strong></td>
+                <td align="center"><strong>Developer</strong></td>
+                <td align="center"><strong>Date</strong></td>
+                <td align="center"><strong>Deadline</strong></td>
+                <td align="center"><strong>Description</strong></td>
+                <td align="center"><strong>Status</strong></td>
+                <td align="center"></td>
+            </tr>
+            {% for i in oj %}
+                <tr>
+                    <td align="center">{{ i.ttitle }}</td>
+                    <td align="center">{{ i.LOGIN.username }}</td>
+                    <td align="center">{{ i.date }}</td>
+                    <td align="center">{{ i.deadline }}</td>
+                    <td align="center">{{ i.tdesc }}</td>
+                    <td align="center">{{ i.status }}</td>
+                    <td align="center">
+                        <a href="/edittask/{{ i.id }}#about"><i class="fas fa-pencil-alt"></i></a><br><br><br>
+
+                        <a href="/dlttsk/{{ i.id }}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>{% endfor %}
+        </table>
+    </form>
+    </body>
+{% endblock %}

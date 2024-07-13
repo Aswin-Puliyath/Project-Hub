@@ -1,0 +1,39 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+    <body>
+    <form action="/repsearch#about" method="post">
+        <div class="section-title">
+            <span>Reports</span>
+            <h2>Reports</h2>
+        </div>
+        <div class="d-flex justify-content-center mb-4">
+            <div class="d-flex">
+                <input name="title" type="text" value="{{ tt }}" class="form-control mr-2" placeholder="Project name"
+                       required/>&nbsp;&nbsp;&nbsp;
+                <input type="submit" class="btn btn-primary" name="Submit" value="SEARCH"/>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for report in ob %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><b>{{ report.ASSIGN.PROJECT.ptitle }}</b></h5>
+                            <p class="card-text text-center">
+                                <b>{{ report.ASSIGN.LOGIN.username }}</b>&nbsp;&nbsp;&nbsp;{{ report.date }}</p>
+                            <p class="card-text">{{ report.report }}</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% if forloop.counter == 3 %}
+                    <div class="w-100"></div> <!-- This adds a space after the first row -->
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </form>
+    </body>
+{% endblock %}

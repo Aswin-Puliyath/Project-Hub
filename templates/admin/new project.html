@@ -1,0 +1,117 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block body %}
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Colorlib Templates">
+        <meta name="author" content="Colorlib">
+        <meta name="keywords" content="Colorlib Templates">
+
+        <!-- Title Page-->
+        <title>Project</title>
+
+        <!-- Font special for pages-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+              rel="stylesheet">
+
+        <!-- Main CSS-->
+        <link href="{% static 'project/css/main.css' %}" rel="stylesheet" media="all">
+    </head>
+
+    <body>
+    <div class="page-wrapper bg-dark p-t-100 p-b-50">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h2 class="title">Enter Project Details</h2>
+                </div>
+                <div class="card-body">
+                    <form id="projectForm" method="POST" novalidate>
+                        <div class="form-row">
+                            <div class="name">Project ID</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="id" required>
+                                <span class="invalid-feedback">Please enter a project ID.</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Title</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="name" required>
+                                    <span class="invalid-feedback">Please enter a title.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Deadline</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="date" name="dead" required>
+                                    <span class="invalid-feedback">Please select a deadline.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Project Lead</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <select id="selectProjectLead" name="select" class="form-control" required>
+                                        <option value="" disabled selected>Select</option>
+                                        {% if not obj %}
+                                            <option value="" disabled>No Project Leads To Assign</option>
+                                        {% else %}
+                                            {% for i in obj %}
+                                                <option value="{{ i.id }}">{{ i.username }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                    <span class="invalid-feedback">Please select a project lead.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Description</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="desc" required></textarea>
+                                    <span class="invalid-feedback">Please enter a description.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer" align="center">
+                    <button class="btn btn--radius-2 btn--blue-2" type="button" onclick="validateAndSubmitForm()">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'project/vendor/jquery/jquery.min.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'project/js/global.js' %}"></script>
+
+    <!-- Custom JS to validate form and set form action -->
+    <script>
+        function validateAndSubmitForm() {
+            var form = document.getElementById('projectForm');
+            var isValid = form.checkValidity();
+
+            if (isValid) {
+                form.action = '/projectcode'; // Set your desired action URL here
+                form.submit();
+            } else {
+                form.classList.add('was-validated');
+            }
+        }
+    </script>
+    </body>
+
+{% endblock %}
